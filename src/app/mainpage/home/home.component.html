@@ -21,7 +21,7 @@
       <mat-card class="mt-4">
         <div *ngFor="let melange of melanges">
           <div class="row">
-            <div class="col">{{melange.name}}</div>
+            <div class="col"><a class="btn" mat-button [routerLink]="['/melange', melange._id]">{{melange.name}}</a></div>
             <div class="col-6"></div>
             <div class="col">{{melange.createdAt | date:'longDate'}} {{melange.createdAt | date: 'mediumTime'}}</div>
           </div>

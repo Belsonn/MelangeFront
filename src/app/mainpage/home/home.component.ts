@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Melange } from 'src/app/models/melange.model';
 import { MelangeService } from '../melange.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   isLoading = false;
   melanges : [Melange]
-  constructor(private melangeService: MelangeService) { }
+  constructor(private melangeService: MelangeService, private router: Router) { }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -20,5 +21,9 @@ export class HomeComponent implements OnInit {
       this.isLoading = false;
     })
   }
+  onMelangeClick(id) {
+    this.router.navigate(['melange', id]);
+  }
 
 }
+

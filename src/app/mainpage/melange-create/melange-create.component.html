@@ -1,0 +1,25 @@
+<div class="container">
+  <mat-spinner *ngIf="isLoading" class="pd-4" color="accent"></mat-spinner>
+  <mat-card *ngIf="!isLoading">
+    <form (submit)="onCreate(melangeForm)" #melangeForm="ngForm">
+      <mat-form-field appearance="outline">
+        <mat-label>Nazwa</mat-label>
+        <input
+          matInput
+          name="name"
+          ngModel
+          type="text"
+          #nameInput="ngModel"
+          required
+          minlength="3"
+        />
+        <mat-error *ngIf="nameInput.invalid"
+          >Nazwa musi mieć przynajmniej 3 litery.</mat-error
+        >
+      </mat-form-field>
+      <button mat-raised-button color="accent" type="submit">
+        Stwórz
+      </button>
+    </form>
+  </mat-card>
+</div>

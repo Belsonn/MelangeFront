@@ -1,0 +1,98 @@
+<div class="container">
+  <mat-spinner *ngIf="isLoading" class="pd-4" color="accent"></mat-spinner>
+  <mat-card *ngIf="!isLoading" class="mt-4">
+    <div  class="box">
+      <form
+        (submit)="onSignup(signupForm)"
+        #signupForm="ngForm"
+
+      >
+        <div *ngIf="error" class="alert alert-danger" role="alert">
+          There is account with this email address. Please Login or try with
+          another.
+        </div>
+
+        <div class="flexbox-parent">
+          <div layout="row" layout-align="center center">
+            <mat-form-field appearance="outline">
+              <mat-label>Username</mat-label>
+              <input
+                matInput
+                name="username"
+                ngModel
+                type="text"
+                #userInput="ngModel"
+                required
+                minlength="3"
+              />
+              <mat-error *ngIf="userInput.invalid"
+                >Username must have at least 3 characters</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                name="email"
+                ngModel
+                type="email"
+                #emailInput="ngModel"
+                required
+                email
+              />
+              <mat-error *ngIf="emailInput.invalid"
+                >Please enter a valid email.</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input
+                type="password"
+                name="password"
+                ngModel
+                #passwordInput="ngModel"
+                [(ngModel)]="password"
+                matInput
+                required
+                minlength="6"
+                (ngModelChange)="resetMatch()"
+              />
+              <mat-error *ngIf="passwordInput.invalid"
+                >Password must have at least 6 characters.</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Password Confirm</mat-label>
+              <input
+                type="password"
+                name="passwordConfirm"
+                ngModel
+                #passwordConfirmInput="ngModel"
+                [(ngModel)]="passwordConfirm"
+                matInput
+                required
+                minlength="6"
+                (ngModelChange)="resetMatch()"
+              />
+              <mat-error *ngIf="passwordConfirmInput.invalid"
+                >Password must have at least 6 characters.</mat-error
+              >
+            </mat-form-field>
+          </div>
+        </div>
+        <mat-error *ngIf="!passwordMatch" class="mb-1"
+          >Passwords are not the same!</mat-error
+        >
+
+        <button
+          mat-raised-button
+          color="accent"
+          type="submit"
+
+        >
+          Signup
+        </button>
+      </form>
+    </div>
+  </mat-card>
+</div>

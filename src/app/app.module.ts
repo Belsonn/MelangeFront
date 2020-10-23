@@ -1,8 +1,10 @@
 import { AuthInterceptor } from './authentication/auth.interceptor';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule, LOCALE_ID } from '@angular/core';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
@@ -10,6 +12,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,8 +31,11 @@ import { registerLocaleData } from '@angular/common';
 import localePl from '@angular/common/locales/pl';
 import localePlExtra from '@angular/common/locales/extra/pl';
 import { MelangeViewComponent } from './mainpage/melange-view/melange-view.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MelangeJoinComponent } from './mainpage/melange-join/melange-join.component';
+import { CreateMelangeProductComponent } from './mainpage/createmelangeproduct/createmelangeproduct.component';
+
 registerLocaleData(localePl, 'pl', localePlExtra);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,10 +46,13 @@ registerLocaleData(localePl, 'pl', localePlExtra);
     LandingPageComponent,
     MelangeCreateComponent,
     MelangeViewComponent,
+    MelangeJoinComponent,
+    CreateMelangeProductComponent,
   ],
   imports: [
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule,
@@ -54,12 +65,16 @@ registerLocaleData(localePl, 'pl', localePlExtra);
     MatExpansionModule,
     MatCardModule,
     MatTabsModule,
+    MatAutocompleteModule,
     MatDividerModule,
+    MatSelectModule,
+    MatChipsModule,
     FontAwesomeModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: LOCALE_ID, useValue: 'pl' },  ],
+    { provide: LOCALE_ID, useValue: 'pl' },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

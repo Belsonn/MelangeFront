@@ -13,13 +13,25 @@ export class MelangeService {
   ) {}
 
 
-  createMelange(name:string) {
-      this.http.post<MelangeResponse>("http://localhost:3000/api/v1/melange/create", {name: name}).subscribe(res => {
-          this.router.navigate(["/home"]);
+  createMelange(name: string) {
+    this.http
+      .post<MelangeResponse>('http://localhost:3000/api/v1/melange/create', {
+        name: name,
       })
+      .subscribe((res) => {
+        this.router.navigate(['/melange', res.data.melange._id]);
+      });
+  }
+  getMyMelanges() {
+    return this.http.get<MelangesResponse>(
+      'http://localhost:3000/api/v1/melange/my'
+    );
   }
 
-  getMyMelanges() {
-      return this.http.get<MelangesResponse>("http://localhost:3000/api/v1/melange/my")
+  getMelange(id) {
+    return this.http.get<MelangeResponse>(
+      'http://localhost:3000/api/v1/melange/' + id
+    );
   }
 }
+

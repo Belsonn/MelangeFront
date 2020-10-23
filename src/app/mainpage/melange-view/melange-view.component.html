@@ -18,12 +18,17 @@
     </mat-tab> -->
     <mat-tab label="Produkty">
       <ng-template matTabContent>
+        <div class="melange-overview mt-4">
+          <div class="melange-overview-name text-center">
+            {{ melange.name }}
+          </div>
+          <div class="melange-overview-invite">{{ melange.inviteToken }}</div>
+        </div>
         <div class="mt-4">
           <div class="text-center">
             <button
               mat-raised-button
               color="accent"
-              class="ml-3"
               routerLink="addProduct"
             >
               Dodaj produkt
@@ -32,14 +37,13 @@
         </div>
         <mat-card *ngIf="melange.products.length > 0" class="mt-4">
           <div
-            *ngFor="let melangeProduct of melange.products"
+            *ngFor="let melangeProduct of melange.products; let last = last"
             class="melange_product"
           >
             <div>
               <h3 class="melange_product-name">
                 {{ melangeProduct.product.name }}
               </h3>
-
             </div>
             <!-- <div class="melange_product-users-row">
               <div class="melange_product-users">
@@ -47,19 +51,50 @@
               </div>
             </div> -->
             <div class="melange_product-paidBy">
-              <span >Zapłacone przez: <span class="melange_product-paidBy-name">{{melangeProduct.paidBy.user.name}}</span></span>
+              <span class = "melange_product-paidBy-title"
+                >Kupione przez:
+                <span class="melange_product-paidBy-name">{{
+                  melangeProduct.paidBy.user.name
+                }}</span></span
+              >
+              <span ></span>
               <span class="melange_product-price">
                 {{ melangeProduct.product.price | currency: "PLN" }}
               </span>
             </div>
-            <hr>
+            <hr *ngIf="!last">
           </div>
         </mat-card>
       </ng-template>
     </mat-tab>
     <mat-tab label="Rozliczenie">
       <ng-template matTabContent>
-        TODO
+        <mat-card>
+          <div class="summary">
+            <div *ngFor="let melangeUser of melange.users; let last = last " class="summary-user">
+              <h1 class="summary-user-name">
+                {{melangeUser.user.name}}
+              </h1>
+            <div class="summary-user-cost">
+              <span class="summary-user-cost summary-expense">Wydatki</span>
+              <span class="summary-user-cost summary-income">Zapłacił</span>
+            </div>
+            <div class="summary-user-cost">
+              <span class="summary-user-cost-number summary-expense">{{-melangeUser.expenses | currency: "PLN"}}</span>
+              <span class="summary-user-cost-number summary-income">+{{melangeUser.incomes | currency: "PLN"}}</span>
+            </div>
+            <div *ngIf="melangeUser.incomes >= melangeUser.expenses" class="summary-user-totalcost">
+              <h1 class="summary-income">Bilans:</h1>
+              <h2 class="summary-user-totalcost summary-income">+{{melangeUser.incomes - melangeUser.expenses | currency: "PLN"}}</h2>
+            </div>
+            <div *ngIf="melangeUser.incomes<melangeUser.expenses" class="summary-user-totalcost">
+              <h1 class="summary-expense">Bilans:</h1>
+              <h2 class="summary-user-totalcost summary-expense">{{melangeUser.incomes - melangeUser.expenses | currency: "PLN"}}</h2>
+            </div>
+            <hr *ngIf="!last">
+            </div>
+          </div>
+        </mat-card>
       </ng-template>
     </mat-tab>
   </mat-tab-group>

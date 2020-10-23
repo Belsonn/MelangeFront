@@ -5,6 +5,9 @@
       <div *ngIf="errorUser" class="alert alert-danger" role="alert">
         Proszę uzupełnij wszystie pola i spróbuj ponownie.
       </div>
+      <div *ngIf="priceError" class="alert alert-danger" role="alert">
+        Cena nie może być ujemna!
+      </div>
       <div *ngIf="errorServer" class="alert alert-danger" role="alert">
         Coś poszło nie tak. Spróbuj ponownie później.
       </div>
@@ -59,8 +62,10 @@
           type="number"
           #priceInput="ngModel"
           required
+          min = "0"
+          (change) = "onPriceChange()"
         />
-        <mat-error *ngIf="nameInput.invalid">Wprowadź cenę</mat-error>
+        <mat-error *ngIf=" priceInput.invalid">Wprowadź cenę</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Osoby do podziału</mat-label>
@@ -85,7 +90,7 @@
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Kupił</mat-label>
-        <mat-select [(value)]="paidBy">
+        <mat-select [(value)]="paidBy" required>
           <mat-option *ngFor="let melangeUser of melangeUsers" [value]="melangeUser">{{
             melangeUser.user.name
           }}</mat-option>
@@ -95,6 +100,5 @@
         Stwórz
       </button>
     </form>
-    <button (click)="onTest()">TEST</button>
   </mat-card>
 </div>

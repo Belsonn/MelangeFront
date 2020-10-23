@@ -20,6 +20,7 @@ export class CreateMelangeProductComponent implements OnInit {
   melangeUsers: [MelangeUser];
   errorServer = false;
   errorUser = false;
+  priceError = false;
   userControl = new FormControl([]);
   melangeId: string = '';
   paidBy: MelangeUser;
@@ -63,6 +64,10 @@ export class CreateMelangeProductComponent implements OnInit {
     }
   }
 
+  onPriceChange(){
+    this.priceError = false;
+  }
+
   getProduct() {
     if (this.selectedShop !== '') {
       this.findPrice(this.selectedProduct, this.selectedShop);
@@ -93,14 +98,15 @@ export class CreateMelangeProductComponent implements OnInit {
 
   onAddProduct(form: NgForm) {
     this.isLoading = true;
-    let usersId: string[] = [];
-    this.userControl.value.forEach((user) => {
-      usersId.push(user._id);
-    });
-    // console.log(usersId);
-    // console.log('paid', this.paidBy)
-    if (form.invalid || usersId.length == 0) {
+    this.errorUser = false;
+    if (!form.valid || this.userControl.value.length == 0 || !this.paidBy) {
       this.errorUser = true;
+      this.isLoading=false;
+      return;
+    }
+    if(form.value.price < 0) {
+      this.priceError = true;
+      this.isLoading = false;
       return;
     }
     this.melangeService
@@ -111,7 +117,6 @@ export class CreateMelangeProductComponent implements OnInit {
             .createMelangeProduct(res.data.product, this.userControl.value, this.melangeId, this.paidBy)
             .subscribe(
               (res) => {
-                // console.log(res);
                 this.router.navigate(['/melange', this.melangeId]);
               },
               (err) => {

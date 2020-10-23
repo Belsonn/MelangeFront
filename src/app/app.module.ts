@@ -33,6 +33,7 @@ import localePlExtra from '@angular/common/locales/extra/pl';
 import { MelangeViewComponent } from './mainpage/melange-view/melange-view.component';
 import { MelangeJoinComponent } from './mainpage/melange-join/melange-join.component';
 import { CreateMelangeProductComponent } from './mainpage/createmelangeproduct/createmelangeproduct.component';
+import { NgpSortModule } from 'ngp-sort-pipe';
 
 registerLocaleData(localePl, 'pl', localePlExtra);
 
@@ -70,6 +71,7 @@ registerLocaleData(localePl, 'pl', localePlExtra);
     MatSelectModule,
     MatChipsModule,
     FontAwesomeModule,
+    NgpSortModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

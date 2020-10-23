@@ -10,28 +10,24 @@
     <div *ngIf="!isLoading">
       <div class="row mt-4">
         <div class="col text-left">
-          <button
-            mat-raised-button
-            color="accent"
-            routerLink="/create"
-          >
+          <button mat-raised-button color="accent" routerLink="/create">
             Stwórz melanż
           </button>
         </div>
         <div class="col"></div>
         <div class="col text-right">
           <button
-          mat-raised-button
-          color="accent"
-          class="ml-3"
-          routerLink="/melange/join"
-        >
-          Dołącz
-        </button>
+            mat-raised-button
+            color="accent"
+            class="ml-3"
+            routerLink="/melange/join"
+          >
+            Dołącz
+          </button>
         </div>
       </div>
       <mat-card class="mt-4">
-        <div *ngFor="let melange of melanges">
+        <div *ngFor="let melange of melanges.slice().reverse(); let last = last">
           <div class="row">
             <div class="col text-left">
               <a
@@ -46,7 +42,7 @@
               {{ melange.createdAt | date: "fullDate" }}
             </div>
           </div>
-          <hr />
+          <hr *ngIf="!last" />
         </div>
       </mat-card>
     </div>

@@ -42,7 +42,7 @@ const routes: Routes = [
         component: MelangeViewComponent,
       },
       {
-        path:'melange/:id/addProduct',
+        path:'melange/:id/products',
         component: CreateMelangeProductComponent,
       }
 

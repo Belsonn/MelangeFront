@@ -1,6 +1,7 @@
 <div class="container">
   <mat-spinner *ngIf="isLoading" class="pd-4" color="accent"></mat-spinner>
   <mat-card *ngIf="!isLoading">
+    <button (click)="onTest()">asdfasf</button>
     <form (submit)="onAddProduct(melangeForm)" #melangeForm="ngForm">
       <div *ngIf="errorUser" class="alert alert-danger" role="alert">
         Proszę uzupełnij wszystie pola i spróbuj ponownie.
@@ -73,26 +74,26 @@
           <mat-select-trigger>
             <mat-chip-list>
               <mat-chip
-                *ngFor="let melangeUser of userControl.value"
+                *ngFor="let user of userControl.value"
                 [removable]="true"
-                (removed)="onUserRemoved(melangeUser)"
+                (removed)="onUserRemoved(user)"
               >
-                {{ melangeUser.user.name }}
+                {{ user }}
                 <mat-icon matChipRemove>cancel</mat-icon>
               </mat-chip>
             </mat-chip-list>
           </mat-select-trigger>
 
-          <mat-option *ngFor="let melangeUser of melangeUsers" [value]="melangeUser">{{
-            melangeUser.user.name
+          <mat-option *ngFor="let user of users" [value]="user">{{
+            user
           }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Kupił</mat-label>
         <mat-select [(value)]="paidBy" required>
-          <mat-option *ngFor="let melangeUser of melangeUsers" [value]="melangeUser">{{
-            melangeUser.user.name
+          <mat-option *ngFor="let user of users" [value]="user">{{
+            user
           }}</mat-option>
         </mat-select>
       </mat-form-field>

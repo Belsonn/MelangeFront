@@ -1,25 +1,35 @@
 import { MelangeService } from './../melange.service';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-melange-create',
   templateUrl: './melange-create.component.html',
-  styleUrls: ['./melange-create.component.scss']
+  styleUrls: ['./melange-create.component.scss'],
 })
-export class MelangeCreateComponent implements OnInit {
-
+export class MelangeCreateComponent implements OnInit, OnDestroy {
   isLoading = false;
+  error: boolean = false;
+  private errorStatus: Subscription;
 
-  constructor(private router: Router, private melangeService: MelangeService) { }
+  constructor(private melangeService: MelangeService) {}
 
   ngOnInit(): void {
+    this.errorStatus = this.melangeService
+      .getErrorStatus()
+      .subscribe((errorStatus) => {
+        this.error = errorStatus;
+      });
   }
-  onCreate(form:NgForm) {
-    if(form.invalid) {
+  onCreate(form: NgForm) {
+    if (form.invalid) {
       return;
     }
     this.melangeService.createMelange(form.value.name);
+  }
+
+  ngOnDestroy() {
+    this.errorStatus.unsubscribe();
   }
 }

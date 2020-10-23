@@ -21,9 +21,9 @@ export class HomeComponent implements OnInit {
       this.isLoading = false;
     })
   }
+
   onMelangeClick(id) {
     this.router.navigate(['melange', id]);
   }
 
 }
-

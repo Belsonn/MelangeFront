@@ -9,23 +9,44 @@
     <mat-spinner *ngIf="isLoading" class="pd-4" color="accent"></mat-spinner>
     <div *ngIf="!isLoading">
       <div class="row mt-4">
-        <button
+        <div class="col text-left">
+          <button
+            mat-raised-button
+            color="accent"
+            routerLink="/create"
+          >
+            Stwórz melanż
+          </button>
+        </div>
+        <div class="col"></div>
+        <div class="col text-right">
+          <button
           mat-raised-button
           color="accent"
           class="ml-3"
-          routerLink="/create"
+          routerLink="/melange/join"
         >
-          Stwórz melanż
+          Dołącz
         </button>
+        </div>
       </div>
       <mat-card class="mt-4">
         <div *ngFor="let melange of melanges">
           <div class="row">
-            <div class="col"><a class="btn" mat-button [routerLink]="['/melange', melange._id]">{{melange.name}}</a></div>
-            <div class="col-6"></div>
-            <div class="col">{{melange.createdAt | date:'longDate'}} {{melange.createdAt | date: 'mediumTime'}}</div>
+            <div class="col text-left">
+              <a
+                class="btn"
+                mat-button
+                [routerLink]="['/melange', melange._id]"
+                >{{ melange.name }}</a
+              >
+            </div>
+            <div class="col"></div>
+            <div class="col text-right">
+              {{ melange.createdAt | date: "fullDate" }}
+            </div>
           </div>
-          <hr>
+          <hr />
         </div>
       </mat-card>
     </div>

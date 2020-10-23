@@ -1,4 +1,39 @@
 mat-spinner {
-    margin: auto;
-    margin-top: 15%;
-} 
+  margin: auto;
+  margin-top: 15%;
+}
+
+.melange-overview {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0 6rem;
+
+  &-name {
+      font-size: 1.6rem;
+      letter-spacing: 0.35px;
+      font-style: bold;
+  }
+
+  &-invite {
+    font-size: 1.5rem;
+    font-style: bold;
+    letter-spacing: 0.2rem;
+    // color: #3f51b5;
+    color: #ff4081;
+  }
+}
+@media(max-width:600px) {
+    .melange-overview {
+        margin: 0 2rem;
+    }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+// ::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{
+//     min-width: 0!important;
+//     padding: 3px!important;
+//     margin: 3px!important;
+//    }

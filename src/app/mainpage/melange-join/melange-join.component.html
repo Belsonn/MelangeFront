@@ -1,0 +1,28 @@
+<div class="container">
+  <mat-card>
+    <div *ngIf="error" class="alert alert-danger" role="alert">
+      Wprowadzono błędny kod albo już jesteś na tym melanżu.
+    </div>
+    <form (submit)="onJoin(joinForm)" #joinForm="ngForm">
+      <mat-form-field appearance="outline">
+        <mat-label>Kod zaproszeniowy</mat-label>
+        <input
+          matInput
+          name="token"
+          ngModel
+          type="text"
+          #tokenInput="ngModel"
+          required
+          minlength="6"
+          maxlength="6"
+        />
+        <mat-error *ngIf="tokenInput.invalid"
+          >Wprowadzony kod jest nieprawidłowy.</mat-error
+        >
+      </mat-form-field>
+      <button mat-raised-button color="accent" type="submit">
+        Dołącz
+      </button>
+    </form>
+  </mat-card>
+</div>

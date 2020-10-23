@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthResponse } from './../models/authResponse.model';
 import { Subject } from 'rxjs';
-import {UserModelResponse} from './../models/user.model';
+import { UserModelResponse } from './../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -32,15 +32,15 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   onAuth(response: AuthResponse) {
-      this.token = response.token;
-      if(response.token) {
-          this.userName = response.data.user.name;
-          this.userId = response.data.user._id;
-          this.isAuthenticated = true;
-          this.authStatus.next(true);
-          this.saveAuthData(response.token, response.expiresIn);
-          this.router.navigate(['/home'])
-      }
+    this.token = response.token;
+    if (response.token) {
+      this.userName = response.data.user.name;
+      this.userId = response.data.user._id;
+      this.isAuthenticated = true;
+      this.authStatus.next(true);
+      this.saveAuthData(response.token, response.expiresIn);
+      this.router.navigate(['/home']);
+    }
   }
 
   autoAuth() {
@@ -76,12 +76,14 @@ export class AuthService {
     };
     this.http
       .post<AuthResponse>('http://localhost:3000/api/v1/users/signup', newUser)
-      .subscribe((res) => {
+      .subscribe(
+        (res) => {
           this.onAuth(res);
-      }),
-      (err) => {
-        this.authStatus.next(false);
-      };
+        },
+        (err) => {
+          this.authStatus.next(false);
+        }
+      );
   }
 
   login(email: string, password: string) {
@@ -106,7 +108,6 @@ export class AuthService {
     this.clearAuthData();
     this.router.navigate(['/']);
   }
-
 
   getMe() {
     return this.http.get<UserModelResponse>(

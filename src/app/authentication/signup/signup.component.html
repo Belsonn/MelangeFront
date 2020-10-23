@@ -1,17 +1,12 @@
 <div class="container">
   <mat-spinner *ngIf="isLoading" class="pd-4" color="accent"></mat-spinner>
   <mat-card *ngIf="!isLoading" class="mt-4">
-    <div  class="box">
-      <form
-        (submit)="onSignup(signupForm)"
-        #signupForm="ngForm"
-
-      >
-        <div *ngIf="error" class="alert alert-danger" role="alert">
-          There is account with this email address. Please Login or try with
-          another.
-        </div>
-
+    <div class="box">
+      <div *ngIf="error" class="alert alert-danger" role="alert">
+        Konto o tej nazwie lub e-mailu już istnieje. Zaloguj się albo wprowadź
+        inne dane.
+      </div>
+      <form (submit)="onSignup(signupForm)" #signupForm="ngForm">
         <div class="flexbox-parent">
           <div layout="row" layout-align="center center">
             <mat-form-field appearance="outline">
@@ -84,12 +79,7 @@
           >Passwords are not the same!</mat-error
         >
 
-        <button
-          mat-raised-button
-          color="accent"
-          type="submit"
-
-        >
+        <button mat-raised-button color="accent" type="submit">
           Signup
         </button>
       </form>

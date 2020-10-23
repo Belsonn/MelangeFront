@@ -14,10 +14,13 @@ export interface MelangeResponse {
 }
 
 export interface Melange {
-    users: [string];
-    products: [string];
-    _id: string;
-    name: string;
-    createdAt: Date;
-    inviteToken: string;
+  users: [{
+    name: string,
+    _id: string
+  }];
+  products: [string];
+  _id: string;
+  name: string;
+  createdAt: Date;
+  inviteToken: string;
 }

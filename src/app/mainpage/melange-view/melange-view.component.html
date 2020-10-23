@@ -1,2 +1,48 @@
 <mat-spinner *ngIf="isLoading" class="pd-4" color="accent"></mat-spinner>
-<p>melange-view works!</p>
+<div *ngIf="!isLoading" class="container">
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab label="Ogólne">
+      <ng-template matTabContent>
+        <div class="melange-overview mt-4">
+          <div class="melange-overview-name text-center">{{melange.name}}</div>
+          <span class="spacer"></span>
+          <div class="melange-overview-invite">{{melange.inviteToken}}</div>
+        </div>
+        <mat-card class="mt-4">
+          <p>potem</p>
+          <button (click)="onClick()">test</button>
+        </mat-card>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Produkty">
+      <ng-template matTabContent>
+        <div class="mt-4">
+          <div class="text-center">
+            <button
+              mat-raised-button
+              color="accent"
+              class="ml-3"
+              routerLink="addProduct"
+            >
+              Dodaj produkt
+            </button>
+          </div>
+        </div>
+        <mat-card *ngIf="melange.products.length > 0" class="mt-4">
+          <div *ngFor="let melangeProduct of melange.products" class="melange_product">
+            <h3 class="melange_product-name">
+              {{melangeProduct.product.name}}
+            </h3>
+            <p class="melange_product-price">{{melangeProduct.product.price | currency:'PLN'}} </p>
+          </div>
+        </mat-card>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Rozliczenie">
+      <ng-template matTabContent>
+        TODO
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+
+</div>

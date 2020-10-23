@@ -68,26 +68,26 @@
           <mat-select-trigger>
             <mat-chip-list>
               <mat-chip
-                *ngFor="let user of userControl.value"
+                *ngFor="let melangeUser of userControl.value"
                 [removable]="true"
-                (removed)="onUserRemoved(user)"
+                (removed)="onUserRemoved(melangeUser)"
               >
-                {{ user.name }}
+                {{ melangeUser.user.name }}
                 <mat-icon matChipRemove>cancel</mat-icon>
               </mat-chip>
             </mat-chip-list>
           </mat-select-trigger>
 
-          <mat-option *ngFor="let user of users" [value]="user">{{
-            user.name
+          <mat-option *ngFor="let melangeUser of melangeUsers" [value]="melangeUser">{{
+            melangeUser.user.name
           }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Kupił</mat-label>
         <mat-select [(value)]="paidBy">
-          <mat-option *ngFor="let user of users" [value]="user">{{
-            user.name
+          <mat-option *ngFor="let melangeUser of melangeUsers" [value]="melangeUser">{{
+            melangeUser.user.name
           }}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -95,5 +95,6 @@
         Stwórz
       </button>
     </form>
+    <button (click)="onTest()">TEST</button>
   </mat-card>
 </div>

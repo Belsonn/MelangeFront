@@ -1,19 +1,21 @@
 <mat-spinner *ngIf="isLoading" class="pd-4" color="accent"></mat-spinner>
 <div *ngIf="!isLoading" class="container">
   <mat-tab-group mat-stretch-tabs>
-    <mat-tab label="Ogólne">
+    <!-- <mat-tab label="Ogólne">
       <ng-template matTabContent>
         <div class="melange-overview mt-4">
-          <div class="melange-overview-name text-center">{{melange.name}}</div>
+          <div class="melange-overview-name text-center">
+            {{ melange.name }}
+          </div>
           <span class="spacer"></span>
-          <div class="melange-overview-invite">{{melange.inviteToken}}</div>
+          <div class="melange-overview-invite">{{ melange.inviteToken }}</div>
         </div>
         <mat-card class="mt-4">
           <p>potem</p>
           <button (click)="onClick()">test</button>
         </mat-card>
       </ng-template>
-    </mat-tab>
+    </mat-tab> -->
     <mat-tab label="Produkty">
       <ng-template matTabContent>
         <div class="mt-4">
@@ -29,11 +31,28 @@
           </div>
         </div>
         <mat-card *ngIf="melange.products.length > 0" class="mt-4">
-          <div *ngFor="let melangeProduct of melange.products" class="melange_product">
-            <h3 class="melange_product-name">
-              {{melangeProduct.product.name}}
-            </h3>
-            <p class="melange_product-price">{{melangeProduct.product.price | currency:'PLN'}} </p>
+          <div
+            *ngFor="let melangeProduct of melange.products"
+            class="melange_product"
+          >
+            <div>
+              <h3 class="melange_product-name">
+                {{ melangeProduct.product.name }}
+              </h3>
+
+            </div>
+            <!-- <div class="melange_product-users-row">
+              <div class="melange_product-users">
+                <span *ngFor="let user of melangeProduct.users" class="melange_product-username">{{user.name}}</span>
+              </div>
+            </div> -->
+            <div class="melange_product-paidBy">
+              <span >Zapłacone przez: <span class="melange_product-paidBy-name">{{melangeProduct.paidBy.user.name}}</span></span>
+              <span class="melange_product-price">
+                {{ melangeProduct.product.price | currency: "PLN" }}
+              </span>
+            </div>
+            <hr>
           </div>
         </mat-card>
       </ng-template>
@@ -44,5 +63,4 @@
       </ng-template>
     </mat-tab>
   </mat-tab-group>
-
 </div>

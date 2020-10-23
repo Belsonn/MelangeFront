@@ -1,3 +1,4 @@
+import { MelangeUser } from './../../models/melangeUser.model';
 import { UserModel } from './../../models/user.model';
 import { Component, OnInit } from '@angular/core';
 import { MelangeService } from '../melange.service';
@@ -16,18 +17,18 @@ export class CreateMelangeProductComponent implements OnInit {
   isLoading = false;
   selectedShop: string = '';
   selectedProduct: string = '';
-  users: [UserModel];
+  melangeUsers: [MelangeUser];
   errorServer = false;
   errorUser = false;
   userControl = new FormControl([]);
   melangeId: string = '';
-  paidBy: UserModel;
+  paidBy: MelangeUser;
 
   constructor(private melangeService: MelangeService, private router: Router) {}
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.users = this.melangeService.melange.users;
+    this.melangeUsers = this.melangeService.melange.users;
     this.melangeId = this.melangeService.melange._id;
 
     this.melangeService.getAllProducts().subscribe((res) => {
@@ -43,6 +44,10 @@ export class CreateMelangeProductComponent implements OnInit {
       this.shops.splice(0, 1);
       this.isLoading = false;
     });
+  }
+
+  onTest(){
+    console.log(this.userControl.value)
   }
 
   onUserRemoved(user: string) {
@@ -103,7 +108,7 @@ export class CreateMelangeProductComponent implements OnInit {
       .subscribe(
         (res) => {
           this.melangeService
-            .createMelangeProduct(res.data.product._id, usersId, this.melangeId, this.paidBy._id)
+            .createMelangeProduct(res.data.product, this.userControl.value, this.melangeId, this.paidBy)
             .subscribe(
               (res) => {
                 // console.log(res);

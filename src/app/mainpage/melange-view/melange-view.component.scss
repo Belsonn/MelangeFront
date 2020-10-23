@@ -22,6 +22,51 @@ mat-spinner {
     color: #ff4081;
   }
 }
+
+.melange_product{
+  margin-top: 1rem;
+
+  &-name{
+
+    font-size:1.5rem;
+    display: block;
+    animation: moveInLeft 1s ease-out;
+
+  }
+
+  // &-users-row {
+  //   display:flex;
+  //   justify-content: space-between;
+
+  // }
+  // &-spacer{
+  //   flex: 1 1 auto;
+  // }
+
+  &-username{
+    margin-right: 0.5rem;
+  }
+  &-paidBy {
+    display:flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+
+    &-name {
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.35px;
+    }
+  }
+
+  &-price {
+    font-size: 1.1rem;
+    color: #3f51b5;
+    font-style: bold;
+  }
+  //border-bottom: 1px solid #3f51b5;
+}
+
+
 @media(max-width:600px) {
     .melange-overview {
         margin: 0 2rem;
@@ -32,8 +77,19 @@ mat-spinner {
   flex: 1 1 auto;
 }
 
-// ::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{
-//     min-width: 0!important;
-//     padding: 3px!important;
-//     margin: 3px!important;
-//    }
+
+@keyframes moveInLeft {
+  0% {
+      opacity: 0;
+      transform: translateX(10rem);
+  }
+
+  80% {
+      transform: translateX(-1rem);
+  }
+
+  100% {
+      opacity: 1;
+      transform: translate(0);
+  }
+}

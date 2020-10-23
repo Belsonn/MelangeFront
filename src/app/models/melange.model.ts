@@ -1,3 +1,6 @@
+import { MelangeUser } from './melangeUser.model';
+import {  MelangeProduct } from './product.model';
+
 export interface MelangesResponse {
   status: string;
   results: number;
@@ -14,11 +17,8 @@ export interface MelangeResponse {
 }
 
 export interface Melange {
-  users: [{
-    name: string,
-    _id: string
-  }];
-  products: [string];
+  users: [MelangeUser];
+  products: [MelangeProduct];
   _id: string;
   name: string;
   createdAt: Date;

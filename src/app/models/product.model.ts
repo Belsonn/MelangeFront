@@ -30,4 +30,10 @@ export interface MelangeProduct {
     _id:string,
     product: Product,
     paidBy: MelangeUser
-}
+  }
+
+  export interface MelangeProductResponse {
+      status: string,
+      data: {
+          product: MelangeProduct
+      }

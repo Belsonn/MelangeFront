@@ -25,6 +25,8 @@ import { NgpSortModule } from "ngp-sort-pipe";
 import { FooterComponent } from './common/footer/footer.component';
 import { BackbuttonComponent } from './common/backbutton/backbutton.component';
 import { DeleteProductDialogComponent } from './common/delete-product-dialog/delete-product-dialog.component';
+import { MelangeSummaryComponent } from './mainpage/melange-summary/melange-summary.component';
+import { MelangeOverviewComponent } from './mainpage/melange-overview/melange-overview.component';
 
 registerLocaleData(localePl, 'pl', localePlExtra);
 
@@ -43,6 +45,8 @@ registerLocaleData(localePl, 'pl', localePlExtra);
     FooterComponent,
     BackbuttonComponent,
     DeleteProductDialogComponent,
+    MelangeSummaryComponent,
+    MelangeOverviewComponent,
   ],
   imports: [
     HttpClientModule,

@@ -40,18 +40,22 @@ export class MelangeOverviewComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.melangeService.updateProductID = null;
-      this.me = this.melangeService.melange.users.find((el) => {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.melangeService.getMelange(this.id).subscribe((res) => {
+      this.melange = res.data.melange;
+      this.melange.users = this.melangeService.fixTempUser(res.data.melange.users);
+      this.me = res.data.melange.users.find((el) => {
         if (el.user._id == this.authService.getUserId()) return el;
       });
-      this.melange = this.melangeService.melange;
       this.melangeCost = this.melange;
       this.melangeCost.products.forEach((el) => {
         el.myCost = this.calculateMyCost(el);
       });
-      setTimeout(() =>{
-        this.isLoading = false;
-        this.contentLoaded = true;
-      }, 500);
+      this.melangeService.melange = this.melange;
+    });
+    setTimeout(() =>{
+      this.isLoading = false;
+    }, 500);
   }
   onClick() {
     console.log(this.melangeCost);

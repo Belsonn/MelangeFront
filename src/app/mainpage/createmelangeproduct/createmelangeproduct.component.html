@@ -69,7 +69,7 @@
         <mat-error *ngIf=" priceInput.invalid">Wprowadź cenę</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <mat-label>Osoby do podziału</mat-label>
+        <mat-label>Dla kogo:</mat-label>
         <mat-select [formControl]="userControl" multiple>
           <mat-select-trigger>
             <mat-chip-list>
@@ -90,7 +90,7 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <mat-label>Kupił</mat-label>
+        <mat-label>Zapłacone przez</mat-label>
         <mat-select [(value)]="paidBy" required>
           <mat-option *ngFor="let user of users" [value]="user">{{
             user
@@ -98,7 +98,7 @@
         </mat-select>
       </mat-form-field>
       <button mat-raised-button color="accent" type="submit">
-        Stwórz
+        Zatwierdź
       </button>
     </form>
   </mat-card>

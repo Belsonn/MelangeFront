@@ -34,6 +34,7 @@ import { MelangeViewComponent } from './mainpage/melange-view/melange-view.compo
 import { MelangeJoinComponent } from './mainpage/melange-join/melange-join.component';
 import { CreateMelangeProductComponent } from './mainpage/createmelangeproduct/createmelangeproduct.component';
 import { NgpSortModule } from 'ngp-sort-pipe';
+import { FooterComponent } from './common/footer/footer.component';
 
 registerLocaleData(localePl, 'pl', localePlExtra);
 
@@ -49,6 +50,7 @@ registerLocaleData(localePl, 'pl', localePlExtra);
     MelangeViewComponent,
     MelangeJoinComponent,
     CreateMelangeProductComponent,
+    FooterComponent,
   ],
   imports: [
     HttpClientModule,

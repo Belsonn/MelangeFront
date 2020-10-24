@@ -1,0 +1,18 @@
+.footer {
+    height: 200px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    text-align: center;
+    padding: 0 15px;
+    &-content {
+      margin-top: 50px;
+    }
+    &-created{
+      margin-top: 1rem;
+      color: #000;
+      font-size: 0.8rem;
+    }
+  } 

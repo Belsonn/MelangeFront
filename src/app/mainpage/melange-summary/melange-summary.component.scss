@@ -1,0 +1,45 @@
+.summary {
+  &-user {
+    margin-bottom: 1rem;
+  }
+  &-user-name {
+    text-align: center;
+    color: #3f51b5;
+    font-size: 1.4rem;
+    letter-spacing: 0.15rem;
+    margin-bottom: 1rem;
+  }
+
+  &-user-cost {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 2.3rem;
+    font-size: 1rem;
+    &-number {
+      font-size: 1.2rem;
+      width: 80px;
+      text-align: center;
+      margin: 1rem 2rem 3rem 1.5rem;
+    }
+  }
+  &-income {
+    color: #41b028;
+  }
+  &-expense {
+    color: #b03828;
+  }
+
+  &-user-totalcost {
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .summary-user-cost {
+    margin: 0 0.5rem;
+
+    &-number {
+      margin: 1rem 0.3rem 2rem 0.3rem;
+    }
+  }
+}

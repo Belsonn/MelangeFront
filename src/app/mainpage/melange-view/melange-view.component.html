@@ -1,161 +1,20 @@
 <mat-spinner *ngIf="isLoading" class="pd-4" color="accent"></mat-spinner>
 <div *ngIf="!isLoading" class="container">
-  <mat-tab-group mat-stretch-tabs>
+  <div  class="melange-overview">
+    <div class="melange-overview-name">
+      {{ melange.name }}
+    </div>
+    <div class="melange-overview-invite">{{ melange.inviteToken }}</div>
+  </div>
+  <mat-tab-group [backgroundColor]="'primary'" [color]="'accent'" mat-stretch-tabs>
     <mat-tab label="Produkty">
       <ng-template matTabContent>
-        <!-- <button (click)="onClick()">sad</button> -->
-        <div class="melange-overview mt-4">
-          <div class="melange-overview-name text-center">
-            {{ melange.name }}
-          </div>
-          <div class="melange-overview-invite">{{ melange.inviteToken }}</div>
-        </div>
-        <div class="mt-4"></div>
-        <div class="melange-overview-sortBy">
-          <mat-form-field appearance="fill">
-            <mat-label>Sortuj przez</mat-label>
-            <mat-select
-              (selectionChange)="onChangeSortBy($event.value)"
-              [(ngModel)]="selectedBy"
-            >
-              <mat-option
-                *ngFor="let sortOrd of sortByList"
-                [value]="sortOrd"
-                >{{ sortOrd }}</mat-option
-              >
-            </mat-select>
-          </mat-form-field>
-          <div class="melange-overview-button-container">
-            <button
-              mat-fab
-              color="accent"
-              class="melange-overview-button"
-              routerLink="products"
-            >
-              <fa-icon [icon]="faPlus"></fa-icon>
-            </button>
-          </div>
-          <mat-form-field appearance="fill">
-            <mat-label>Sortuj</mat-label>
-            <mat-select
-              (selectionChange)="onChangeSortOrder($event.value)"
-              [(ngModel)]="selectedOrder"
-            >
-              <mat-option
-                *ngFor="let sortOrd of sortOrderList"
-                [value]="sortOrd"
-                >{{ sortOrd }}</mat-option
-              >
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <mat-card *ngIf="melange.products.length > 0" class="mt-4">
-          <div
-            *ngFor="
-              let melangeProduct of melangeCost.products
-                | sortBy: sortOrder:sortBy;
-              let last = last
-            "
-            class="melange_product"
-          >
-            <div class="melange_product-container">
-              <div>
-                <div class="melange_product-name-container">
-                  <div class="link">
-                    <a
-                      (click)="onUpdateProduct(melangeProduct._id)"
-                      routerLink="products"
-                    >
-                      <h3 class="melange_product-name">
-                        {{ melangeProduct.product.name }}
-                      </h3>
-                    </a>
-                  </div>
-                  <div class="melange_product-paidBy">
-                    <span class="melange_product-paidBy-title"
-                      >Kupione przez:
-                      <span class="melange_product-paidBy-name">{{
-                        melangeProduct.paidBy.user.name
-                      }}</span></span
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="melange_product-button-delete">
-                <button mat-mini-fab color="warn" (click) ="openDialog(melangeProduct._id)">
-                  <fa-icon [icon]="faTrash"></fa-icon>
-                </button>
-              </div>
-            </div>
-            <div class="melange_product-balance">
-              <div>
-                <span class="melange_product-myCost">Mój bilans: </span>
-                <span
-                  [ngClass]="{
-                    'summary-income': melangeProduct.myCost >= 0,
-                    'summary-expense': melangeProduct.myCost < 0
-                  }"
-                  >{{ melangeProduct.myCost | currency: "PLN" }}</span
-                >
-              </div>
-              <span class="melange_product-price">
-                {{ melangeProduct.product.price | currency: "PLN" }}
-              </span>
-            </div>
-            <hr *ngIf="!last" />
-          </div>
-        </mat-card>
+        <app-melange-overview></app-melange-overview>
       </ng-template>
     </mat-tab>
     <mat-tab label="Rozliczenie">
       <ng-template matTabContent>
-        <mat-card>
-          <div class="summary">
-            <div
-              *ngFor="let melangeUser of melange.users; let last = last"
-              class="summary-user"
-            >
-              <h1 class="summary-user-name">
-                {{ melangeUser.user.name }}
-              </h1>
-              <div class="summary-user-cost">
-                <span class="summary-user-cost summary-expense">Wydatki</span>
-                <span class="summary-user-cost summary-income">Zapłacił</span>
-              </div>
-              <div class="summary-user-cost">
-                <span class="summary-user-cost-number summary-expense">{{
-                  -melangeUser.expenses | currency: "PLN"
-                }}</span>
-                <span class="summary-user-cost-number summary-income"
-                  >+{{ melangeUser.incomes | currency: "PLN" }}</span
-                >
-              </div>
-              <div
-                *ngIf="melangeUser.incomes >= melangeUser.expenses"
-                class="summary-user-totalcost"
-              >
-                <h1 class="summary-income">Bilans:</h1>
-                <h2 class="summary-user-totalcost summary-income">
-                  +{{
-                    melangeUser.incomes - melangeUser.expenses | currency: "PLN"
-                  }}
-                </h2>
-              </div>
-              <div
-                *ngIf="melangeUser.incomes < melangeUser.expenses"
-                class="summary-user-totalcost"
-              >
-                <h1 class="summary-expense">Bilans:</h1>
-                <h2 class="summary-user-totalcost summary-expense">
-                  {{
-                    melangeUser.incomes - melangeUser.expenses | currency: "PLN"
-                  }}
-                </h2>
-              </div>
-              <hr *ngIf="!last" />
-            </div>
-          </div>
-        </mat-card>
+        <app-melange-summary></app-melange-summary>
       </ng-template>
     </mat-tab>
   </mat-tab-group>

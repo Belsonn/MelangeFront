@@ -1,0 +1,142 @@
+.melange-overview {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 6rem;
+  margin-top: 2rem;
+
+  &-name {
+      text-align: cet;
+    font-size: 1.6rem;
+    letter-spacing: 0.35px;
+    font-style: bold;
+  }
+
+  &-invite {
+    font-size: 1.5rem;
+    font-style: bold;
+    letter-spacing: 0.2rem;
+    // color: #3f51b5;
+    color: #ff4081;
+  }
+  &-button-container {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  &-button {
+      font-size: 1.2rem
+  }
+  &-sortBy {
+      margin-top: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+}
+
+.melange_product {
+  margin-top: 1rem;
+
+  &-container {
+    display:flex;
+    justify-content: space-between;
+  }
+
+  &-name {
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+    display: inline-block;
+    animation: moveInLeft 1s ease-out;
+  }
+
+  // &-users-row {
+  //   display:flex;
+  //   justify-content: space-between;
+
+  // }
+  // &-spacer{
+  //   flex: 1 1 auto;
+  // }
+
+  &-username {
+    margin-right: 0.5rem;
+  }
+  &-balance {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+  }
+
+  &-income {
+    color: #41b028;
+  }
+  &-expense {
+    color: #b03828;
+  }
+
+  &-paidBy {
+    &-name {
+      font-size: 1.2rem;
+      // text-transform: uppercase;
+      letter-spacing: 0.05rem;
+      margin-left: 0.2rem;
+      color: #3f51b5;
+    }
+    &-title {
+      font-size: 1rem;
+      letter-spacing: 0.02rem;
+    }
+  }
+
+  &-price {
+    font-size: 1.1rem;
+    color: #3f51b5;
+    font-style: bold;
+  }
+
+  &-myCost {
+    font-size: 1rem;
+    letter-spacing: 0.02rem;
+  }
+  &-button-delete{
+    margin-top: 1rem;
+  }
+}
+
+
+
+@media (max-width: 600px) {
+  .melange-overview {
+    margin: 0 2rem;
+    &-button {
+      bottom: 1rem;
+      left: 45vw;
+      text-align: center;
+      z-index: 2000;
+      position: fixed;
+    }
+  }
+
+  .summary-user-cost {
+    margin: 0 0.5rem;
+
+    &-number {
+      margin: 1rem 0.3rem 2rem 0.3rem;
+    }
+  }
+}
+
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(10rem);
+  }
+
+  80% {
+    transform: translateX(-1rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}

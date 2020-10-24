@@ -1,0 +1,47 @@
+<mat-card>
+  <div class="summary">
+    <div
+      *ngFor="let melangeUser of melange.users; let last = last"
+      class="summary-user"
+    >
+      <h1 class="summary-user-name">
+        {{ melangeUser.user.name }}
+      </h1>
+      <div class="summary-user-cost">
+        <span class="summary-user-cost summary-expense">Wydatki</span>
+        <span class="summary-user-cost summary-income">Zapłacił</span>
+      </div>
+      <div class="summary-user-cost">
+        <span class="summary-user-cost-number summary-expense">{{
+          -melangeUser.expenses | currency: "PLN"
+        }}</span>
+        <span class="summary-user-cost-number summary-income"
+          >+{{ melangeUser.incomes | currency: "PLN" }}</span
+        >
+      </div>
+      <div
+        *ngIf="melangeUser.incomes >= melangeUser.expenses"
+        class="summary-user-totalcost"
+      >
+        <h1 class="summary-income">Bilans:</h1>
+        <h2 class="summary-user-totalcost summary-income">
+          +{{
+            melangeUser.incomes - melangeUser.expenses | currency: "PLN"
+          }}
+        </h2>
+      </div>
+      <div
+        *ngIf="melangeUser.incomes < melangeUser.expenses"
+        class="summary-user-totalcost"
+      >
+        <h1 class="summary-expense">Bilans:</h1>
+        <h2 class="summary-user-totalcost summary-expense">
+          {{
+            melangeUser.incomes - melangeUser.expenses | currency: "PLN"
+          }}
+        </h2>
+      </div>
+      <hr *ngIf="!last" />
+    </div>
+  </div>
+</mat-card>

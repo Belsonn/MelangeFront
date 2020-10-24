@@ -1,3 +1,4 @@
+import { NullResponse } from './../models/nullResponse.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -77,6 +78,9 @@ export class MelangeService {
       `${environment.apiURL}melangeProduct/create`,
       { product: productId, users: users, melangeId: melangeId, paidBy: paidBy, melangeUsers: melangeUsers, melangeProductID: melangeProductID },
     );
+  }
+  deleteMelangeProduct(id) {
+    return this.http.delete<NullResponse>(`${environment.apiURL}melangeProduct/${id}`)
   }
   getMyMelanges() {
     return this.http.get<MelangesResponse>(`${environment.apiURL}melange/my`);

@@ -8,7 +8,15 @@ mat-spinner {
   margin: auto;
   margin-top: 15%;
 }
-
-.ml-0{
-  margin-left: 0;
+.home-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0.5rem;
+}
+.melanges-container{
+  display: flex;
+  justify-content: space-between;
+}
+.melange-date {
+  text-align: right;
 }

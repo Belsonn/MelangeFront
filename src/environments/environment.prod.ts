@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: false,
+  apiURL: 'https://murmuring-refuge-00851.herokuapp.com/api/v1/'
 };

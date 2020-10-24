@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthResponse } from './../models/authResponse.model';
 import { Subject } from 'rxjs';
 import { UserModelResponse } from './../models/user.model';
+import { environment } from './../../environments/environment';
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -75,7 +77,7 @@ export class AuthService {
       passwordConfirm: passwordConfirm,
     };
     this.http
-      .post<AuthResponse>('http://localhost:3000/api/v1/users/signup', newUser)
+      .post<AuthResponse>(`${environment.apiURL}users/signup`, newUser)
       .subscribe(
         (res) => {
           this.onAuth(res);
@@ -89,7 +91,7 @@ export class AuthService {
   login(email: string, password: string) {
     const User = { email: email, password: password };
     this.http
-      .post<AuthResponse>('http://localhost:3000/api/v1/users/login', User)
+      .post<AuthResponse>(`${environment.apiURL}users/login`, User)
       .subscribe(
         (res) => {
           this.onAuth(res);
@@ -111,7 +113,7 @@ export class AuthService {
 
   getMe() {
     return this.http.get<UserModelResponse>(
-      'http://localhost:3000/api/v1/users/me'
+      `${environment.apiURL}users/me`
     );
   }
 

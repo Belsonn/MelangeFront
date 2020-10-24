@@ -1,49 +1,39 @@
-<!-- <mat-tab-group animationDuration="0ms" mat-align-tabs="center">
-    <mat-tab label="First"> Content 1 </mat-tab>
-    <mat-tab label="Second"> Content 2 </mat-tab>
-    <mat-tab label="Third"> Content 3 </mat-tab>
-  </mat-tab-group>
-   -->
-
-   <div class="container">
-    <mat-spinner *ngIf="isLoading" class="pd-4" color="accent"></mat-spinner>
-    <div *ngIf="!isLoading">
-      <div class="row mt-4">
-        <div class="col text-left">
-          <button mat-raised-button color="accent" routerLink="/create">
-            Stwórz melanż
-          </button>
-        </div>
-        <div class="col"></div>
-        <div class="col text-right">
-          <button
-            mat-raised-button
-            color="accent"
-            class="ml-3"
-            routerLink="/melange/join"
-          >
-            Dołącz
-          </button>
-        </div>
+<mat-spinner *ngIf="isLoading" class="pd-4" color="accent"></mat-spinner>
+<div *ngIf="!isLoading" class="container">
+    <div class="home-buttons-container">
+      <div>
+        <button mat-raised-button color="accent" routerLink="/create">
+          Stwórz melanż
+        </button>
       </div>
-      <mat-card class="mt-4">
-        <div *ngFor="let melange of melanges.slice().reverse(); let last = last">
-          <div class="row">
-            <div class="col text-left">
-              <a
-                class="btn"
-                mat-button
-                [routerLink]="['/melange', melange._id]"
-                >{{ melange.name }}</a
-              >
-            </div>
-            <div class="col"></div>
-            <div class="col text-right">
-              {{ melange.createdAt | date: "fullDate" }}
-            </div>
-          </div>
-          <hr *ngIf="!last" />
-        </div>
-      </mat-card>
+      <div>
+        <button
+          mat-raised-button
+          color="accent"
+          class="ml-3"
+          routerLink="/join"
+        >
+          Dołącz
+        </button>
+      </div>
     </div>
-  </div>
+    <mat-card *ngIf="melanges.length>0" class="mt-4">
+      <div *ngFor="let melange of melanges.slice().reverse(); let last = last">
+        <div class="melanges-container">
+          <div>
+            <a
+              class="btn"
+              mat-button
+              [routerLink]="['/melange', melange._id]"
+              >{{ melange.name }}</a
+            >
+          </div>
+          <div class="melange-date">
+            {{ melange.createdAt | date: "fullDate" }}
+          </div>
+        </div>
+        <hr *ngIf="!last" />
+      </div>
+    </mat-card>
+  <app-footer></app-footer>
+</div>

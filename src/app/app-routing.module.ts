@@ -21,32 +21,33 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'create',
+    component: MelangeCreateComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path:'join',
+    component: MelangeJoinComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path:'melange/:id',
+    component: MelangeViewComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path:'melange/:id/products',
+    component: CreateMelangeProductComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: '',
     component: LandingPageComponent,
-    canActivateChild: [AuthGuard],
-    children: [
-      {
-        path: 'home',
-        component: HomeComponent,
-      },
-      {
-        path: 'create',
-        component: MelangeCreateComponent,
-      },
-      {
-        path:'melange/join',
-        component: MelangeJoinComponent,
-      },
-      {
-        path:'melange/:id',
-        component: MelangeViewComponent,
-      },
-      {
-        path:'melange/:id/products',
-        component: CreateMelangeProductComponent,
-      }
-
-    ]
   },
 
 ];

@@ -1,7 +1,7 @@
-<div class="container">
-  <mat-spinner *ngIf="isLoading" class="pd-4" color="accent"></mat-spinner>
-  <mat-card *ngIf="!isLoading">
-    <button (click)="onTest()">asdfasf</button>
+<mat-spinner *ngIf="isLoading" class="pd-4" color="accent"></mat-spinner>
+<div *ngIf="!isLoading" class="container">
+  <app-backbutton></app-backbutton>
+  <mat-card >
     <form (submit)="onAddProduct(melangeForm)" #melangeForm="ngForm">
       <div *ngIf="errorUser" class="alert alert-danger" role="alert">
         Proszę uzupełnij wszystie pola i spróbuj ponownie.
@@ -102,4 +102,5 @@
       </button>
     </form>
   </mat-card>
+  <app-footer></app-footer>
 </div>

@@ -36,6 +36,7 @@ import { CreateMelangeProductComponent } from './mainpage/createmelangeproduct/c
 import { NgpSortModule } from 'ngp-sort-pipe';
 import { FooterComponent } from './common/footer/footer.component';
 import { BackbuttonComponent } from './common/backbutton/backbutton.component';
+import { NullResponseComponent } from './models/null-response/null-response.component';
 
 registerLocaleData(localePl, 'pl', localePlExtra);
 
@@ -53,6 +54,7 @@ registerLocaleData(localePl, 'pl', localePlExtra);
     CreateMelangeProductComponent,
     FooterComponent,
     BackbuttonComponent,
+    NullResponseComponent,
   ],
   imports: [
     HttpClientModule,

@@ -39,3 +39,17 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
     background-color: #efefef;}
+    .container {
+        position: relative;
+        z-index: 100;
+        margin-bottom: 200px;
+        overflow: hidden;
+      }
+      mat-spinner {
+        margin: auto;
+        margin-top: 15%;
+    }
+    button:focus{
+      outline: none;
+      border: none;
+    }

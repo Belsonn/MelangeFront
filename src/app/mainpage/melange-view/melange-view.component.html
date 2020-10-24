@@ -1,21 +1,6 @@
 <mat-spinner *ngIf="isLoading" class="pd-4" color="accent"></mat-spinner>
 <div *ngIf="!isLoading" class="container">
   <mat-tab-group mat-stretch-tabs>
-    <!-- <mat-tab label="Ogólne">
-      <ng-template matTabContent>
-        <div class="melange-overview mt-4">
-          <div class="melange-overview-name text-center">
-            {{ melange.name }}
-          </div>
-          <span class="spacer"></span>
-          <div class="melange-overview-invite">{{ melange.inviteToken }}</div>
-        </div>
-        <mat-card class="mt-4">
-          <p>potem</p>
-          <button (click)="onClick()">test</button>
-        </mat-card>
-      </ng-template>
-    </mat-tab> -->
     <mat-tab label="Produkty">
       <ng-template matTabContent>
         <!-- <button (click)="onClick()">sad</button> -->
@@ -25,18 +10,7 @@
           </div>
           <div class="melange-overview-invite">{{ melange.inviteToken }}</div>
         </div>
-        <div class="mt-4">
-          <div class="melange-overview-button-container">
-            <button
-              mat-fab
-              color="accent"
-              class="melange-overview-button"
-              routerLink="products"
-            >
-              <fa-icon [icon]="faPlus"></fa-icon>
-            </button>
-          </div>
-        </div>
+        <div class="mt-4"></div>
         <div class="melange-overview-sortBy">
           <mat-form-field appearance="fill">
             <mat-label>Sortuj przez</mat-label>
@@ -51,6 +25,16 @@
               >
             </mat-select>
           </mat-form-field>
+          <div class="melange-overview-button-container">
+            <button
+              mat-fab
+              color="accent"
+              class="melange-overview-button"
+              routerLink="products"
+            >
+              <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
+          </div>
           <mat-form-field appearance="fill">
             <mat-label>Sortuj</mat-label>
             <mat-select
@@ -74,25 +58,36 @@
             "
             class="melange_product"
           >
-            <div class="melange_product-name-container">
-              <a (click)="onUpdateProduct(melangeProduct._id)" routerLink="products">
-                <h3 class="melange_product-name">
-                  {{ melangeProduct.product.name }}
-                </h3>
-              </a>
-              <span class="melange_product-paidBy-title"
-                >Kupione przez:
-                <span class="melange_product-paidBy-name">{{
-                  melangeProduct.paidBy.user.name
-                }}</span></span
-              >
-            </div>
-            <!-- <div class="melange_product-users-row">
-              <div class="melange_product-users">
-                <span *ngFor="let user of melangeProduct.users" class="melange_product-username">{{user.name}}</span>
+            <div class="melange_product-container">
+              <div>
+                <div class="melange_product-name-container">
+                  <div class="link">
+                    <a
+                      (click)="onUpdateProduct(melangeProduct._id)"
+                      routerLink="products"
+                    >
+                      <h3 class="melange_product-name">
+                        {{ melangeProduct.product.name }}
+                      </h3>
+                    </a>
+                  </div>
+                  <div class="melange_product-paidBy">
+                    <span class="melange_product-paidBy-title"
+                      >Kupione przez:
+                      <span class="melange_product-paidBy-name">{{
+                        melangeProduct.paidBy.user.name
+                      }}</span></span
+                    >
+                  </div>
+                </div>
               </div>
-            </div> -->
-            <div class="melange_product-paidBy">
+              <div class="melange_product-button-delete">
+                <button mat-mini-fab color="warn" (click) ="openDialog(melangeProduct._id)">
+                  <fa-icon [icon]="faTrash"></fa-icon>
+                </button>
+              </div>
+            </div>
+            <div class="melange_product-balance">
               <div>
                 <span class="melange_product-myCost">Mój bilans: </span>
                 <span
@@ -164,4 +159,5 @@
       </ng-template>
     </mat-tab>
   </mat-tab-group>
+  <app-footer></app-footer>
 </div>

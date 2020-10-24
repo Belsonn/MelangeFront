@@ -1,8 +1,3 @@
-mat-spinner {
-  margin: auto;
-  margin-top: 15%;
-}
-
 .melange-overview {
   display: flex;
   justify-content: space-between;
@@ -34,10 +29,15 @@ mat-spinner {
 .melange_product {
   margin-top: 1rem;
 
+  &-container {
+    display:flex;
+    justify-content: space-between;
+  }
+
   &-name {
     margin-top: 0.5rem;
     font-size: 1.5rem;
-    display: block;
+    display: inline-block;
     animation: moveInLeft 1s ease-out;
   }
 
@@ -53,16 +53,18 @@ mat-spinner {
   &-username {
     margin-right: 0.5rem;
   }
-  &-paidBy {
+  &-balance {
     display: flex;
     justify-content: space-between;
     margin: 2rem 0;
+  }
 
+  &-paidBy {
     &-name {
       font-size: 1.2rem;
       // text-transform: uppercase;
       letter-spacing: 0.05rem;
-      margin-left: 0.5rem;
+      margin-left: 0.2rem;
       color: #3f51b5;
     }
     &-title {
@@ -81,7 +83,9 @@ mat-spinner {
     font-size: 1rem;
     letter-spacing: 0.02rem;
   }
-  //border-bottom: 1px solid #3f51b5;
+  &-button-delete{
+    margin-top: 1rem;
+  }
 }
 
 .summary {
@@ -119,6 +123,8 @@ mat-spinner {
     text-align: center;
   }
 }
+
+
 
 @media (max-width: 600px) {
   .melange-overview {

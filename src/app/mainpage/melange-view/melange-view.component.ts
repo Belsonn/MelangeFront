@@ -1,11 +1,12 @@
-import { MelangeUser } from './../../models/melangeUser.model';
 import { Component, OnInit } from '@angular/core';
 import { Melange } from 'src/app/models/melange.model';
 import { MelangeService } from '../melange.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/authentication/auth.service';
 import { MelangeProduct } from 'src/app/models/product.model';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteProductDialogComponent } from '../../common/delete-product-dialog/delete-product-dialog.component';
 
 @Component({
   selector: 'app-melange-view',
@@ -19,10 +20,11 @@ export class MelangeViewComponent implements OnInit {
   melange: Melange;
   melangeCost;
   faPlus = faPlus;
+  faTrash = faTrash;
   sortOrder: string = 'desc';
   sortBy: string = 'product.price';
   sortOrderList = ['Malejąco', 'Rosnąco'];
-  sortByList = ['Cena', 'Produkt', 'Mój koszt'];
+  sortByList = ['Cena', 'Produkt', 'Mój bilans'];
   selectedOrder = 'Malejąco';
   selectedBy = 'Cena';
 
@@ -30,7 +32,7 @@ export class MelangeViewComponent implements OnInit {
     private melangeService: MelangeService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -57,6 +59,17 @@ export class MelangeViewComponent implements OnInit {
     return isIncome.startsWith('+');
   }
 
+  openDialog(id) {
+    const dialogRef = this.dialog.open(DeleteProductDialogComponent, {
+      autoFocus: false,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.onDeleteProduct(id);
+      }
+    })
+  }
+
   onChangeSortOrder(event) {
     this.isLoading = true;
     if (event == 'Rosnąco') {
@@ -74,7 +87,7 @@ export class MelangeViewComponent implements OnInit {
       this.sortBy = 'product.price';
     } else if (event == 'Produkt') {
       this.sortBy = 'product.name';
-    } else if (event == 'Mój koszt') {
+    } else if (event == 'Mój bilans') {
       this.sortBy = 'myCost';
     }
     setTimeout(() => {
@@ -84,6 +97,11 @@ export class MelangeViewComponent implements OnInit {
 
   onUpdateProduct(productId) {
     this.melangeService.updateProductID = productId;
+  }
+  onDeleteProduct(productId) {
+    this.melangeService.deleteMelangeProduct(productId).subscribe(res => {
+      this.ngOnInit();
+    })
   }
 
   calculateMyCost(melangeProduct: MelangeProduct) {

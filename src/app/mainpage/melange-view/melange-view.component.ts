@@ -21,6 +21,7 @@ export class MelangeViewComponent implements OnInit {
   id: string;
   isLoading = false;
   faBars = faBars;
+  totalCost: number = 0;
   faUserPlus = faUserPlus;
   faTrashAlt = faTrashAlt;
 
@@ -38,8 +39,19 @@ export class MelangeViewComponent implements OnInit {
     this.melangeService.getMelange(this.id).subscribe((res) => {
       this.melange = res.data.melange;
 
+      this.totalCost = this.calculateTotalCost(this.melange);
+
       this.isLoading = false;
     });
+  }
+  calculateTotalCost(melange){
+    let cost = 0;
+
+    melange.products.forEach((product) => {
+      cost+=product.product.price;
+    })
+
+    return cost;
   }
 
   openDialogGuest(error) {
@@ -76,6 +88,7 @@ export class MelangeViewComponent implements OnInit {
         this.isLoading = true;
 
         this.melangeService.deleteMelange(this.melange._id);
+
         this.isLoading = false;
       }
     })

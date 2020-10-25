@@ -133,32 +133,72 @@ export class CreateMelangeProductComponent implements OnInit {
       this.isLoading = false;
       return;
     }
-
-    this.melangeService
-      .findProductAndUpdate(form.value.name, form.value.shop, form.value.price)
-      .subscribe(
-        (res) => {
+    if (this.melangeService.updateProductID) {
+      let oldPrice;
+      let forms = form.value;
+      this.melangeService
+        .getMelangeProduct(this.melangeService.updateProductID)
+        .subscribe((res) => {
+          oldPrice = res.data.product.product.price;
           this.melangeService
-            .createMelangeProduct(
-              res.data.product,
-              this.userControl.value,
-              this.melangeId,
-              this.paidBy,
-              this.melangeUsers,
-              this.melangeService.updateProductID
+            .findProductAndUpdate(
+              forms.name,
+              forms.shop,
+              forms.price
             )
-            .subscribe(
-              (res) => {
+            .subscribe((res) => {
+              this.melangeService.updateMelangeProduct(
+                this.userControl.value,
+                res.data.product,
+                oldPrice,
+                this.melangeId,
+                this.paidBy,
+                this.melangeUsers,
+                this.melangeService.updateProductID
+              ).subscribe(res => {
                 this.router.navigate(['/melange', this.melangeId]);
-              },
-              (err) => {
+              }, err => {
                 this.errorServer = true;
-              }
-            );
-        },
-        (err) => {
-          this.errorServer = true;
-        }
-      );
+                this.isLoading = false;
+              });
+            }, err => {
+              this.errorServer = true;
+              this.isLoading = false;
+            });
+        });
+    } else {
+      this.melangeService
+        .findProductAndUpdate(
+          form.value.name,
+          form.value.shop,
+          form.value.price
+        )
+        .subscribe(
+          (res) => {
+
+            this.melangeService
+              .createMelangeProduct(
+                res.data.product,
+                this.userControl.value,
+                this.melangeId,
+                this.paidBy,
+                this.melangeUsers
+              )
+              .subscribe(
+                (res) => {
+                  this.router.navigate(['/melange', this.melangeId]);
+                },
+                (err) => {
+                  this.errorServer = true;
+                  this.isLoading = false;
+                }
+              );
+          },
+          (err) => {
+            this.errorServer = true;
+            this.isLoading = false;
+          }
+        );
+    }
   }
 }

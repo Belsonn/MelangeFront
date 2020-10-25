@@ -10,8 +10,8 @@ import {
 } from '../models/melange.model';
 import {
   ProductsResponse,
-  ProductResponse,
   MelangeProductResponse,
+  ProductResponse,
 } from '../models/product.model';
 import { Subject } from 'rxjs';
 
@@ -85,8 +85,7 @@ export class MelangeService {
     users,
     melangeId,
     paidBy,
-    melangeUsers,
-    melangeProductID
+    melangeUsers
   ) {
     return this.http.post<MelangeResponse>(
       `${environment.apiURL}melangeProduct/create`,
@@ -96,7 +95,21 @@ export class MelangeService {
         melangeId: melangeId,
         paidBy: paidBy,
         melangeUsers: melangeUsers,
-        melangeProductID: melangeProductID,
+      }
+    );
+  }
+
+  updateMelangeProduct(users, newProduct, oldPrice, melangeId, paidBy, melangeUsers, updateMelangeProduct) {
+    return this.http.post<MelangeResponse>(
+      `${environment.apiURL}melangeProduct/update`,
+      {
+        users: users,
+        newProduct: newProduct,
+        oldPrice: oldPrice,
+        melangeId: melangeId,
+        paidBy: paidBy,
+        melangeUsers: melangeUsers,
+        melangeProductToUpdate: updateMelangeProduct
       }
     );
   }
@@ -115,7 +128,6 @@ export class MelangeService {
       this.router.navigate(['/home']);
     })
   }
-
   getMyMelanges() {
     return this.http.get<MelangesResponse>(`${environment.apiURL}melange/my`);
   }

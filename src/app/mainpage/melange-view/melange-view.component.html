@@ -26,16 +26,16 @@
       <div class="melange-overview-invite">
         Kod dołączania: {{ melange.inviteToken }}
       </div>
-      <div class="melange-overview-totalCost">
+      <!-- <div class="melange-overview-totalCost">
         Suma kosztów: <span class="totalCost">{{ totalCost | currency: "PLN"}}</span>
-      </div>
+      </div> -->
     </div>
   </mat-card>
   <mat-tab-group
-  [backgroundColor]="'primary'"
-  [color]="'accent'"
-  mat-stretch-tabs
->
+    [backgroundColor]="'primary'"
+    [color]="'accent'"
+    mat-stretch-tabs
+  >
     <mat-tab label="Produkty">
       <ng-template matTabContent>
         <app-melange-overview></app-melange-overview>

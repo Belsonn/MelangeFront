@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-backbutton',
@@ -8,7 +8,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 })
 export class BackbuttonComponent{
 
-  faArrowLeft = faArrowLeft;
+  faLongArrowAltLeft = faLongArrowAltLeft;
 
   constructor() { }
 

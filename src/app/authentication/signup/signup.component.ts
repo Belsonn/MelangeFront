@@ -15,31 +15,24 @@ export class SignupComponent implements OnInit {
   passwordConfirm: string = '';
   passwordMatch = true;
   error = false;
-  private authStatus: Subscription;
+  info = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.authStatus = this.authService
-      .getAuthStatus()
-      .subscribe((authStatus) => {
-        this.password = '';
-        this.passwordConfirm = '';
-        this.isLoading = false;
-        this.error = !authStatus;
-      });
     if (this.authService.getIsAuthenticated()) {
       this.router.navigate(['home']);
     }
   }
 
   onSignup(form: NgForm) {
+    this.error = false;
+    this.info = false;
     if (!form.valid) {
       return;
     }
     if (this.password !== this.passwordConfirm) {
       this.passwordMatch = false;
-      console.log(this.passwordMatch);
       return;
     }
     this.isLoading = true;
@@ -48,14 +41,21 @@ export class SignupComponent implements OnInit {
       form.value.email,
       form.value.password,
       form.value.passwordConfirm
-    );
+    ).subscribe(res => {
+      this.password = '';
+      this.passwordConfirm = '';
+      this.info = true;
+      this.isLoading = false;
+    }, err => {
+      this.password = '';
+      this.passwordConfirm = '';
+      this.error = true;
+      this.isLoading = false;
+    });
   }
 
   resetMatch() {
     this.passwordMatch = true;
   }
 
-  ngOnDestroy() {
-    this.authStatus.unsubscribe();
-  }
 }

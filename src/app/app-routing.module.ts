@@ -9,6 +9,7 @@ import { MelangeCreateComponent } from './mainpage/melange-create/melange-create
 import { MelangeViewComponent } from './mainpage/melange-view/melange-view.component';
 import { MelangeJoinComponent } from './mainpage/melange-join/melange-join.component';
 import {CreateMelangeProductComponent} from './mainpage/createmelangeproduct/createmelangeproduct.component'
+import { ActivateComponent } from './authentication/activate/activate.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'activate/:token',
+    component: ActivateComponent
   },
   {
     path: 'home',

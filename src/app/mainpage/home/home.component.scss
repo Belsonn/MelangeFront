@@ -11,12 +11,49 @@ mat-spinner {
 .home-buttons-container {
   display: flex;
   justify-content: space-between;
-  margin: 2rem 0.5rem;
+  margin: 2rem 0rem;
+  .home-button {
+      width: 130px;
+  }
 }
-.melanges-container{
+.melanges-container {
   display: flex;
   justify-content: space-between;
 }
 .melange-date {
   text-align: right;
+}
+.blank_card {
+  height: 50vh;
+  &-title {
+      margin-top: 15vh;
+    text-align: center;
+  }
+  .icon {
+    font-size: 3rem;
+    color: #3f51b5;
+    animation: movingUp 0.9s ease-in infinite; 
+    &-left{
+        margin-left: 34px;
+    }
+    &-right{
+        margin-right: 34px;
+    }
+  }
+  .icon-container {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@keyframes movingUp {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(1rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }

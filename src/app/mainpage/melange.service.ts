@@ -59,8 +59,11 @@ export class MelangeService {
       );
   }
 
-  getAllProducts() {
-    return this.http.get<ProductsResponse>(`${environment.apiURL}product`);
+  // getAllProducts() {
+  //   return this.http.get<ProductsResponse>(`${environment.apiURL}product`);
+  // }
+  getMyProducts() {
+    return this.http.get<ProductsResponse>(`${environment.apiURL}product/myProducts`)
   }
 
   findPrice(name: string, shop: string) {

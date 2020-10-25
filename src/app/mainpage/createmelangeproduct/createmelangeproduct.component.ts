@@ -36,7 +36,7 @@ export class CreateMelangeProductComponent implements OnInit {
     this.melangeService.melange.users.forEach((user) => {
       this.users.push(user.user.name);
     });
-    this.melangeService.getAllProducts().subscribe((res) => {
+    this.melangeService.getMyProducts().subscribe((res) => {
       res.data.products.forEach((product) => {
         if (!this.products.includes(product.name)) {
           this.products.push(product.name);

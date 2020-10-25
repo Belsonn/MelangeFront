@@ -3,7 +3,7 @@
   <mat-card *ngIf="!isLoading">
     <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
       <div *ngIf="error" class="alert alert-danger" role="alert">
-        You provided wrong email or password.
+        Podałeś zły e-mail, hasło lub Twoje konto jest nieaktywne.
       </div>
       <mat-form-field appearance="outline">
         <mat-label>E-mail</mat-label>
@@ -17,7 +17,7 @@
           email
         />
         <mat-error *ngIf="emailInput.invalid"
-          >Please enter a valid email.</mat-error
+          >Wprowadź prawidłowy adres e-mail.</mat-error
         >
       </mat-form-field>
       <mat-form-field appearance="outline">
@@ -33,7 +33,7 @@
           minlength="6"
         />
         <mat-error *ngIf="passwordInput.invalid"
-          >Password must have at least 6 characters.</mat-error
+          >Hasło musi składać się z co najmniej 6 znaków.</mat-error
         >
       </mat-form-field>
       <button mat-raised-button color="accent" type="submit">

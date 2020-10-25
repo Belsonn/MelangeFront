@@ -1,2 +1,14 @@
-<!-- <router-outlet *ngIf="isAuthenticated"></router-outlet> -->
-<app-footer></app-footer>
+<div class="background">
+    <div class="title-container">
+        <h1 class="title">Witamy w Melange!</h1>
+        <h4 class="title-small">Zarejestruj się i rozlicz swój melanż z nami</h4>
+    </div>
+    <div routerLink="signup" class="button-container">
+        <button class="button-big">
+            Zarejestruj się
+        </button>
+        <button routerLink="login" class="button-big">
+            Zaloguj się
+        </button>
+    </div>
+</div>

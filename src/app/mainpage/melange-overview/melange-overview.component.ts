@@ -4,7 +4,7 @@ import { MelangeService } from '../melange.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/authentication/auth.service';
 import { MelangeProduct } from 'src/app/models/product.model';
-import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faTrash, faLongArrowAltUp } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteProductDialogComponent } from '../../common/delete-product-dialog/delete-product-dialog.component';
 
@@ -23,6 +23,7 @@ export class MelangeOverviewComponent implements OnInit {
   contentLoaded = false;
   faPlus = faPlus;
   faTrash = faTrash;
+  faLongArrowAltUp = faLongArrowAltUp;
   sortOrder: string = 'desc';
   sortBy: string = 'product.price';
   sortOrderList = ['Malejąco', 'Rosnąco'];

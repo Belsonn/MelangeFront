@@ -33,6 +33,22 @@
   }
 }
 
+.blank_card {
+  height: 40vh;
+  &-title {
+    margin-top: 10vh;
+    text-align: center;
+    font-family: Raleway, sans-serif;
+    font-size: 1.3rem;
+  }
+  .icon {
+    font-size: 3rem;
+    text-align: center;
+    color: #3f51b5;
+    animation: movingUp 0.9s ease-in infinite; 
+  }
+}
+
 .melange_product {
   margin-top: 1rem;
 
@@ -115,6 +131,14 @@
       position: fixed;
     }
   }
+  .icon {
+    bottom: 1rem;
+    left: 30vw;
+    z-index: 2000;
+    position: fixed;
+    transform: rotate(90deg);
+    animation: movingLeft 0.9s ease-in-out infinite !important;
+  }
 
   .summary-user-cost {
     margin: 0 0.5rem;
@@ -122,6 +146,18 @@
     &-number {
       margin: 1rem 0.3rem 2rem 0.3rem;
     }
+  }
+}
+
+@keyframes movingLeft {
+  0%{
+    transform: rotate(90deg) translateY(0);
+  }
+  50% {
+    transform: rotate(90deg) translateY(1rem);
+  }
+  100%{
+    transform: rotate(90deg) translateY(0);
   }
 }
 

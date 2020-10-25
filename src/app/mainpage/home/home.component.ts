@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Melange } from 'src/app/models/melange.model';
 import { MelangeService } from '../melange.service';
 import { Router } from '@angular/router';
+import {faLongArrowAltUp} from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  faLongArrowAltUp = faLongArrowAltUp;
   isLoading = false;
   melanges : [Melange]
   constructor(private melangeService: MelangeService, private router: Router) { }

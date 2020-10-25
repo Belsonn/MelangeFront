@@ -6,7 +6,6 @@ import { Subject } from 'rxjs';
 import { UserModelResponse } from './../models/user.model';
 import { environment } from './../../environments/environment';
 
-
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private isAuthenticated = false;
@@ -76,16 +75,14 @@ export class AuthService {
       password: password,
       passwordConfirm: passwordConfirm,
     };
-    this.http
-      .post<AuthResponse>(`${environment.apiURL}users/signup`, newUser)
-      .subscribe(
-        (res) => {
-          this.onAuth(res);
-        },
-        (err) => {
-          this.authStatus.next(false);
-        }
-      );
+    return this.http.post<AuthResponse>(
+      `${environment.apiURL}users/signup`,
+      newUser
+    );
+  }
+
+  activateAccount(token:string){
+    return this.http.post<AuthResponse>(`${environment.apiURL}users/activate`, {activationToken: token})
   }
 
   login(email: string, password: string) {
@@ -112,9 +109,7 @@ export class AuthService {
   }
 
   getMe() {
-    return this.http.get<UserModelResponse>(
-      `${environment.apiURL}users/me`
-    );
+    return this.http.get<UserModelResponse>(`${environment.apiURL}users/me`);
   }
 
   private saveAuthData(token: string, expirationDate: any) {

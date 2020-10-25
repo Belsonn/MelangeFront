@@ -6,11 +6,15 @@
         Konto o tej nazwie lub e-mailu już istnieje. Zaloguj się albo wprowadź
         inne dane.
       </div>
+      <div *ngIf="info" class="alert alert-success" role="alert">
+        Twoje konto zostało stworzone. Kod aktywacyjny został wysłany na e-mail
+        podany przy rejestracji.
+      </div>
       <form (submit)="onSignup(signupForm)" #signupForm="ngForm">
         <div class="flexbox-parent">
           <div layout="row" layout-align="center center">
             <mat-form-field appearance="outline">
-              <mat-label>Username</mat-label>
+              <mat-label>Nazwa użytkownika</mat-label>
               <input
                 matInput
                 name="username"
@@ -22,11 +26,11 @@
                 maxlength="12"
               />
               <mat-error *ngIf="userInput.invalid"
-                >Username must have at least 3 characters</mat-error
+                >Nazwa użytkownika powinna mieć co najmniej 3 znaki.</mat-error
               >
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Email</mat-label>
+              <mat-label>Adres E-mail</mat-label>
               <input
                 matInput
                 name="email"
@@ -37,11 +41,11 @@
                 email
               />
               <mat-error *ngIf="emailInput.invalid"
-                >Please enter a valid email.</mat-error
+                >Wprowadź prawidłowy adres e-mail.</mat-error
               >
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Password</mat-label>
+              <mat-label>Hasło</mat-label>
               <input
                 type="password"
                 name="password"
@@ -54,11 +58,11 @@
                 (ngModelChange)="resetMatch()"
               />
               <mat-error *ngIf="passwordInput.invalid"
-                >Password must have at least 6 characters.</mat-error
+                >Hasło musi składać się z co najmniej 6 znaków.</mat-error
               >
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Password Confirm</mat-label>
+              <mat-label>Potwierdź hasło</mat-label>
               <input
                 type="password"
                 name="passwordConfirm"
@@ -71,13 +75,13 @@
                 (ngModelChange)="resetMatch()"
               />
               <mat-error *ngIf="passwordConfirmInput.invalid"
-                >Password must have at least 6 characters.</mat-error
+                >Hasło musi składać się z co najmniej 6 znaków.</mat-error
               >
             </mat-form-field>
           </div>
         </div>
         <mat-error *ngIf="!passwordMatch" class="mb-1"
-          >Passwords are not the same!</mat-error
+          >Hasła nie są takie same!</mat-error
         >
 
         <button mat-raised-button color="accent" type="submit">

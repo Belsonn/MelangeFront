@@ -38,6 +38,14 @@
           <fa-icon [icon]="faPlus"></fa-icon>
         </button>
       </div>
+      <mat-card *ngIf="melange.products.length < 1" class="blank_card">
+        <div class="icon">
+          <fa-icon [icon]="faLongArrowAltUp"></fa-icon>
+        </div>
+        <h3 class="blank_card-title">
+          Dodaj swój pierwszy produkt!
+        </h3>
+      </mat-card>
       <mat-card *ngIf="melange.products.length > 0" class="mt-4">
         <div
           *ngFor="

@@ -2,7 +2,7 @@
 <div *ngIf="!isLoading" class="container">
     <div class="home-buttons-container">
       <div>
-        <button mat-raised-button color="accent" routerLink="/create">
+        <button mat-raised-button color="accent" class="home-button" routerLink="/create">
           Stwórz melanż
         </button>
       </div>
@@ -10,7 +10,7 @@
         <button
           mat-raised-button
           color="accent"
-          class="ml-3"
+          class="home-button"
           routerLink="/join"
         >
           Dołącz
@@ -34,6 +34,19 @@
         </div>
         <hr *ngIf="!last" />
       </div>
+    </mat-card>
+    <mat-card *ngIf="melanges.length<1" class="blank_card">
+      <div class="icon-container">
+        <div class="icon icon-left">
+          <fa-icon [icon]="faLongArrowAltUp"></fa-icon>
+        </div>
+        <div class="icon icon-right">
+          <fa-icon [icon]="faLongArrowAltUp"></fa-icon>
+        </div>
+      </div>
+      <h3 class="blank_card-title">
+        Stwórz swój pierwszy melanż, bądź zapytaj znajomego o kod dostępu.
+      </h3>
     </mat-card>
   <app-footer></app-footer>
 </div>

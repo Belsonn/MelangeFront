@@ -1,6 +1,11 @@
 .melange-overview {
   margin-bottom: 2rem;
-  
+
+  &-menu-container{
+    display: flex;
+    justify-content:space-between;
+  }
+
   &-name {
     font-family: Raleway;
     text-align: center;
@@ -16,9 +21,28 @@
     color: #3f51b5;
     // color: #ff4081;
   }
-}
-@media (max-width: 600px) {
-  .melange-overview {
-    margin: 2rem 0.3rem;
+  .hamburger-icon{
+    font-size: 1.3rem;
   }
+
 }
+.menu-delete-icon{
+color:#c71c10;
+svg{
+  fill:#c71c10;
+}
+}
+.menu-add-icon{
+color: #b3eb9b;
+svg{
+  fill:#b3eb9b;
+}
+}
+.dummy{
+opacity: 0;
+}
+// @media (max-width: 600px) {
+//     .melange-overview {
+//       // margin: 2rem 0.3rem;
+//     }
+// }

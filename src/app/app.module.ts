@@ -21,7 +21,7 @@ import localePlExtra from '@angular/common/locales/extra/pl';
 import { MelangeViewComponent } from './mainpage/melange-view/melange-view.component';
 import { MelangeJoinComponent } from './mainpage/melange-join/melange-join.component';
 import { CreateMelangeProductComponent } from './mainpage/createmelangeproduct/createmelangeproduct.component';
-import { NgpSortModule } from "ngp-sort-pipe";
+import { NgpSortModule } from 'ngp-sort-pipe';
 import { FooterComponent } from './common/footer/footer.component';
 import { BackbuttonComponent } from './common/backbutton/backbutton.component';
 import { DeleteProductDialogComponent } from './common/delete-product-dialog/delete-product-dialog.component';
@@ -29,6 +29,7 @@ import { MelangeSummaryComponent } from './mainpage/melange-summary/melange-summ
 import { MelangeOverviewComponent } from './mainpage/melange-overview/melange-overview.component';
 import { ModalCreateTempUserComponent } from './common/modal-create-temp-user/modal-create-temp-user.component';
 import { ActivateComponent } from './authentication/activate/activate.component';
+import { ModalDeleteMelangeComponent } from './common/modal-delete-melange/modal-delete-melange.component';
 
 registerLocaleData(localePl, 'pl', localePlExtra);
 
@@ -51,6 +52,7 @@ registerLocaleData(localePl, 'pl', localePlExtra);
     MelangeOverviewComponent,
     ModalCreateTempUserComponent,
     ActivateComponent,
+    ModalDeleteMelangeComponent,
   ],
   imports: [
     HttpClientModule,

@@ -7,6 +7,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -30,6 +31,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     MatChipsModule,
     MatDialogModule,
+    MatMenuModule,
   ]
 })
 export class AngularMaterialModule {}

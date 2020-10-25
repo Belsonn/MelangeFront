@@ -1,19 +1,38 @@
 <mat-spinner *ngIf="isLoading" class="pd-4" color="accent"></mat-spinner>
 <div *ngIf="!isLoading" class="container">
   <mat-card>
-    <div  class="melange-overview">
+    <div class="melange-overview">
+      <div class="melange-overview-menu-container">
+        <div class="dummy">Dummy</div>
         <h2 class="melange-overview-name">
-          {{melange.name}}
+          {{ melange.name }}
         </h2>
-      <div class="melange-overview-invite">Kod dołączania: {{ melange.inviteToken }}</div>
-    </div>
-    <div>
-      <button mat-raised-button color="accent" (click)="openDialog(false)">
-        Dodaj Gościa
-      </button>
+        <div class="melange-overview-menu">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <fa-icon class="hamburger-icon" [icon]="faBars"></fa-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openDialogGuest(false)">
+              <mat-icon> <fa-icon class="menu-add-icon" [icon]="faUserPlus"></fa-icon></mat-icon>
+              <span>Dodaj Gościa</span>
+            </button>
+            <button (click)="openDialogDelete()" mat-menu-item>
+              <mat-icon class="menu-delete-icon"><fa-icon [icon]="faTrashAlt"></fa-icon></mat-icon>
+              <span>Usuń Melanż</span>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+      <div class="melange-overview-invite">
+        Kod dołączania: {{ melange.inviteToken }}
+      </div>
     </div>
   </mat-card>
-  <mat-tab-group [backgroundColor]="'primary'" [color]="'accent'" mat-stretch-tabs>
+  <mat-tab-group
+  [backgroundColor]="'primary'"
+  [color]="'accent'"
+  mat-stretch-tabs
+>
     <mat-tab label="Produkty">
       <ng-template matTabContent>
         <app-melange-overview></app-melange-overview>

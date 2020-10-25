@@ -109,6 +109,13 @@ export class MelangeService {
       `${environment.apiURL}melangeProduct/${id}`
     );
   }
+
+  deleteMelange(id){
+    this.http.delete<NullResponse>(`${environment.apiURL}melange/${id}`).subscribe(res => {
+      this.router.navigate(['/home']);
+    })
+  }
+
   getMyMelanges() {
     return this.http.get<MelangesResponse>(`${environment.apiURL}melange/my`);
   }

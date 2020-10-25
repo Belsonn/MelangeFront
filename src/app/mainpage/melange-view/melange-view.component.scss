@@ -1,26 +1,24 @@
 .melange-overview {
-  display: flex;
-  justify-content: space-between;
-  margin: 2rem 6rem;
-  margin-top: 2rem;
-
+  margin-bottom: 2rem;
+  
   &-name {
-      text-align: cet;
+    font-family: Raleway;
+    text-align: center;
     font-size: 1.6rem;
     letter-spacing: 0.35px;
-    font-style: bold;
   }
 
   &-invite {
+    font-family: Oswald;
+    text-align: center;
     font-size: 1.5rem;
-    font-style: bold;
-    letter-spacing: 0.2rem;
-    // color: #3f51b5;
-    color: #ff4081;
+    // letter-spacing: 0.2rem;
+    color: #3f51b5;
+    // color: #ff4081;
   }
 }
 @media (max-width: 600px) {
   .melange-overview {
-    margin: 2rem 2rem;
+    margin: 2rem 0.3rem;
   }
 }

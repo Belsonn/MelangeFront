@@ -27,6 +27,7 @@ import { BackbuttonComponent } from './common/backbutton/backbutton.component';
 import { DeleteProductDialogComponent } from './common/delete-product-dialog/delete-product-dialog.component';
 import { MelangeSummaryComponent } from './mainpage/melange-summary/melange-summary.component';
 import { MelangeOverviewComponent } from './mainpage/melange-overview/melange-overview.component';
+import { ModalCreateTempUserComponent } from './common/modal-create-temp-user/modal-create-temp-user.component';
 
 registerLocaleData(localePl, 'pl', localePlExtra);
 
@@ -47,6 +48,7 @@ registerLocaleData(localePl, 'pl', localePlExtra);
     DeleteProductDialogComponent,
     MelangeSummaryComponent,
     MelangeOverviewComponent,
+    ModalCreateTempUserComponent,
   ],
   imports: [
     HttpClientModule,

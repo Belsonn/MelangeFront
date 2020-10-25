@@ -8,7 +8,11 @@ import {
   MelangesResponse,
   Melange,
 } from '../models/melange.model';
-import { ProductsResponse, ProductResponse, MelangeProductResponse } from '../models/product.model';
+import {
+  ProductsResponse,
+  ProductResponse,
+  MelangeProductResponse,
+} from '../models/product.model';
 import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -73,14 +77,34 @@ export class MelangeService {
     );
   }
 
-  createMelangeProduct(productId, users, melangeId, paidBy, melangeUsers, melangeProductID) {
+  createMelangeProduct(
+    productId,
+    users,
+    melangeId,
+    paidBy,
+    melangeUsers,
+    melangeProductID
+  ) {
     return this.http.post<MelangeResponse>(
       `${environment.apiURL}melangeProduct/create`,
-      { product: productId, users: users, melangeId: melangeId, paidBy: paidBy, melangeUsers: melangeUsers, melangeProductID: melangeProductID },
+      {
+        product: productId,
+        users: users,
+        melangeId: melangeId,
+        paidBy: paidBy,
+        melangeUsers: melangeUsers,
+        melangeProductID: melangeProductID,
+      }
     );
   }
+  createTempUser(melangeId, username){
+    return this.http.post<MelangeResponse>(`${environment.apiURL}melange/createTempUser`, {melange: melangeId, name:username})
+  }
+
   deleteMelangeProduct(id) {
-    return this.http.delete<NullResponse>(`${environment.apiURL}melangeProduct/${id}`)
+    return this.http.delete<NullResponse>(
+      `${environment.apiURL}melangeProduct/${id}`
+    );
   }
   getMyMelanges() {
     return this.http.get<MelangesResponse>(`${environment.apiURL}melange/my`);
@@ -90,6 +114,8 @@ export class MelangeService {
     return this.http.get<MelangeResponse>(`${environment.apiURL}melange/${id}`);
   }
   getMelangeProduct(id) {
-    return this.http.get<MelangeProductResponse>(`${environment.apiURL}melangeProduct/${id}`)
+    return this.http.get<MelangeProductResponse>(
+      `${environment.apiURL}melangeProduct/${id}`
+    );
   }
 }

@@ -1,11 +1,18 @@
 <mat-spinner *ngIf="isLoading" class="pd-4" color="accent"></mat-spinner>
 <div *ngIf="!isLoading" class="container">
-  <div  class="melange-overview">
-    <div class="melange-overview-name">
-      {{ melange.name }}
+  <mat-card>
+    <div  class="melange-overview">
+        <h2 class="melange-overview-name">
+          {{melange.name}}
+        </h2>
+      <div class="melange-overview-invite">Kod dołączania: {{ melange.inviteToken }}</div>
     </div>
-    <div class="melange-overview-invite">{{ melange.inviteToken }}</div>
-  </div>
+    <div>
+      <button mat-raised-button color="accent" (click)="openDialog(false)">
+        Dodaj Gościa
+      </button>
+    </div>
+  </mat-card>
   <mat-tab-group [backgroundColor]="'primary'" [color]="'accent'" mat-stretch-tabs>
     <mat-tab label="Produkty">
       <ng-template matTabContent>

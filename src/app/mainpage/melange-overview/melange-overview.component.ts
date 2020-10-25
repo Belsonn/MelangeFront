@@ -43,7 +43,6 @@ export class MelangeOverviewComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.melangeService.getMelange(this.id).subscribe((res) => {
       this.melange = res.data.melange;
-      this.melange.users = this.melangeService.fixTempUser(res.data.melange.users);
       this.me = res.data.melange.users.find((el) => {
         if (el.user._id == this.authService.getUserId()) return el;
       });
@@ -140,7 +139,7 @@ export class MelangeOverviewComponent implements OnInit {
     let contain: boolean;
     melangeProduct.users.find((el) => {
       if (el.user._id == this.me.user._id) {
-        contain = true;
+       return contain = true;
       } else {
         contain = false;
       }

@@ -37,3 +37,4 @@ export interface MelangeProduct {
       data: {
           product: MelangeProduct
       }
+    }

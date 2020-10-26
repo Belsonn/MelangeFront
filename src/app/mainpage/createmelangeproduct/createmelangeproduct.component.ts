@@ -36,43 +36,14 @@ export class CreateMelangeProductComponent implements OnInit {
     this.melangeService.melange.users.forEach((user) => {
       this.users.push(user.user.name);
     });
-    this.melangeService.getMyProducts().subscribe((res) => {
-      res.data.products.forEach((product) => {
-        if (!this.products.includes(product.name)) {
-          this.products.push(product.name);
-        }
-        if (!this.shops.includes(product.shop)) {
-          this.shops.push(product.shop);
-        }
-      });
-      this.products.splice(0, 1);
-      this.shops.splice(0, 1);
-    });
+    this.fillMyProducts();
     if (this.melangeService.updateProductID) {
-      this.melangeService
-        .getMelangeProduct(this.melangeService.updateProductID)
-        .subscribe((res) => {
-          this.selectedShop = res.data.product.product.shop;
-          res.data.product.users.forEach((user) => {
-            this.usersSelected.push(user.user.name);
-          });
-          this.paidBy = res.data.product.paidBy.user.name;
-          this.selectedProduct = res.data.product.product.name;
-          this.price = res.data.product.product.price;
-          this.userControl = new FormControl(this.usersSelected);
-        });
+      this.fillFormFields();
     } else {
       this.isLoading = false;
       this.userControl = new FormControl([]);
     }
     this.isLoading = false;
-  }
-
-  onTest() {
-    console.log(this.userControl.value);
-  }
-  onTest1(event) {
-    console.log(event);
   }
 
   onUserRemoved(user: string) {
@@ -119,10 +90,37 @@ export class CreateMelangeProductComponent implements OnInit {
       }
     );
   }
+  fillFormFields() {
+    this.melangeService
+      .getMelangeProduct(this.melangeService.updateProductID)
+      .subscribe((res) => {
+        this.selectedShop = res.data.product.product.shop;
+        res.data.product.users.forEach((user) => {
+          this.usersSelected.push(user.user.name);
+        });
+        this.paidBy = res.data.product.paidBy.user.name;
+        this.selectedProduct = res.data.product.product.name;
+        this.price = res.data.product.product.price;
+        this.userControl = new FormControl(this.usersSelected);
+      });
+  }
 
-  onAddProduct(form: NgForm) {
-    this.isLoading = true;
-    this.errorUser = false;
+  fillMyProducts() {
+    this.melangeService.getMyProducts().subscribe((res) => {
+      res.data.products.forEach((product) => {
+        if (!this.products.includes(product.name)) {
+          this.products.push(product.name);
+        }
+        if (!this.shops.includes(product.shop)) {
+          this.shops.push(product.shop);
+        }
+      });
+      this.products.splice(0, 1);
+      this.shops.splice(0, 1);
+    });
+  }
+
+  checkFormValid(form: NgForm) {
     if (!form.valid || this.userControl.value.length == 0 || !this.paidBy) {
       this.errorUser = true;
       this.isLoading = false;
@@ -133,72 +131,83 @@ export class CreateMelangeProductComponent implements OnInit {
       this.isLoading = false;
       return;
     }
-    if (this.melangeService.updateProductID) {
-      let oldPrice;
-      let forms = form.value;
-      this.melangeService
-        .getMelangeProduct(this.melangeService.updateProductID)
-        .subscribe((res) => {
-          oldPrice = res.data.product.product.price;
-          this.melangeService
-            .findProductAndUpdate(
-              forms.name,
-              forms.shop,
-              forms.price
-            )
-            .subscribe((res) => {
-              this.melangeService.updateMelangeProduct(
-                this.userControl.value,
-                res.data.product,
-                oldPrice,
-                this.melangeId,
-                this.paidBy,
-                this.melangeUsers,
-                this.melangeService.updateProductID
-              ).subscribe(res => {
-                this.router.navigate(['/melange', this.melangeId]);
-              }, err => {
-                this.errorServer = true;
-                this.isLoading = false;
-              });
-            }, err => {
+  }
+  updateProduct(form) {
+    let oldPrice;
+    let forms = form.value;
+    this.melangeService
+      .getMelangeProduct(this.melangeService.updateProductID)
+      .subscribe((res) => {
+        oldPrice = res.data.product.product.price;
+        this.melangeService
+          .findProductAndUpdate(forms.name, forms.shop, forms.price)
+          .subscribe(
+            (res) => {
+              this.melangeService
+                .updateMelangeProduct(
+                  this.userControl.value,
+                  res.data.product,
+                  oldPrice,
+                  this.melangeId,
+                  this.paidBy,
+                  this.melangeUsers,
+                  this.melangeService.updateProductID
+                )
+                .subscribe(
+                  (res) => {
+                    this.router.navigate(['/melange', this.melangeId]);
+                  },
+                  (err) => {
+                    this.errorServer = true;
+                    this.isLoading = false;
+                  }
+                );
+            },
+            (err) => {
               this.errorServer = true;
               this.isLoading = false;
-            });
-        });
-    } else {
-      this.melangeService
-        .findProductAndUpdate(
-          form.value.name,
-          form.value.shop,
-          form.value.price
-        )
-        .subscribe(
-          (res) => {
+            }
+          );
+      });
+  }
+  createNewProduct(form) {
+    this.melangeService
+      .findProductAndUpdate(form.value.name, form.value.shop, form.value.price)
+      .subscribe(
+        (res) => {
+          this.melangeService
+            .createMelangeProduct(
+              res.data.product,
+              this.userControl.value,
+              this.melangeId,
+              this.paidBy,
+              this.melangeUsers
+            )
+            .subscribe(
+              (res) => {
+                this.router.navigate(['/melange', this.melangeId]);
+              },
+              (err) => {
+                this.errorServer = true;
+                this.isLoading = false;
+              }
+            );
+        },
+        (err) => {
+          this.errorServer = true;
+          this.isLoading = false;
+        }
+      );
+  }
 
-            this.melangeService
-              .createMelangeProduct(
-                res.data.product,
-                this.userControl.value,
-                this.melangeId,
-                this.paidBy,
-                this.melangeUsers
-              )
-              .subscribe(
-                (res) => {
-                  this.router.navigate(['/melange', this.melangeId]);
-                },
-                (err) => {
-                  this.errorServer = true;
-                  this.isLoading = false;
-                }
-              );
-          },
-          (err) => {
-            this.errorServer = true;
-            this.isLoading = false;
-          }
-        );
+  onAddProduct(form: NgForm) {
+    this.isLoading = true;
+    this.errorUser = false;
+    this.checkFormValid(form);
+    if (this.melangeService.updateProductID) {
+      this.updateProduct(form);
+    } else {
+      this.createNewProduct(form);
     }
   }
 }

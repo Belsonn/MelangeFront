@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiURL: 'https://pure-waters-83641.herokuapp.com/api/v1/'
+  apiURL: 'https://nwta-back.herokuapp.com/api/v1/'
 };
